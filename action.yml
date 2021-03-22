@@ -1,6 +1,8 @@
 name: 'Run Dash Platform Test Suite'
 description: 'Runs end-to-end and functional testing against a Dash network'
 inputs:
+  sdk-install:
+    description: SDK install
   faucet-private-key:
     description: Faucet private key
   dpns-contract-id:
@@ -9,9 +11,7 @@ inputs:
     description: DPNS top level identity ID
   dpns-top-level-identity-private-key:
     description: DPNS top level identity private key
-  sdk-install:
-    description: SDK install
-  version:
+  platform-test-suite-branch:
     description: Platform Test Suite version
     default: latest
 runs:
@@ -20,7 +20,7 @@ runs:
     - name: Run platform test suite
       shell: bash
       run: |
-        docker run --network=host dashpay/platform-test-suite:${{ inputs.version }} 127.0.0.1:3000:3010 \
+        docker run --network=host dashpay/platform-test-suite:${{ inputs.platform-test-suite-branch }} 127.0.0.1:3000:3010 \
         --scope=platform \
         --network=regtest \
         --npm-install=${{ inputs.sdk-install }} \
