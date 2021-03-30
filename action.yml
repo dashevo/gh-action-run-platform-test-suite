@@ -17,10 +17,11 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Run platform test suite
+    - name: Start local network
       shell: bash
+      working-directory: ${{ github.action_path }}
       run: |
-        docker run --network=host dashpay/platform-test-suite:${{ inputs.platform-test-suite-branch }} 127.0.0.1:3000:3010 \
+        source bin/run-platform-test-suite.sh \
         --scope=platform \
         --network=regtest \
         --npm-install=${{ inputs.sdk-install }} \
