@@ -41,19 +41,19 @@ case ${i} in
     network="${i#*=}"
     ;;
     --npm-install=*)
-    npm-install="${i#*=}"
+    npm_install="${i#*=}"
     ;;
     --faucet-key=*)
-    faucet-key="${i#*=}"
+    faucet_key="${i#*=}"
     ;;
     --dpns-contract-id=*)
-    dpns-contract-id="${i#*=}"
+    dpns_contract_id="${i#*=}"
     ;;
     --dpns-tld-identity-id=*)
-    dpns-tld-identity-id="${i#*=}"
+    dpns_tld_identity_id="${i#*=}"
     ;;
     --dpns-tld-identity-private-key=*)
-    dpns-tld-identity-private-key="${i#*=}"
+    dpns_tld_identity_private_key="${i#*=}"
     ;;
 esac
 done
@@ -67,7 +67,7 @@ echo "Installing Platform Test Suite from branch ${branch}"
 
 git clone --depth 1 --branch $branch https://github.com/dashevo/platform-test-suite.git "$TMPDIR/platform-test-suite"
 
-cd "$TMPDIR"/mn-bootstrap
+cd "$TMPDIR"/platform-test-suite
 
 npm ci
 
@@ -83,31 +83,29 @@ then
   cmd="${cmd} --network=${network}"
 fi
 
-if [ -n "${npm-install}" ]
+if [ -n "${npm_install}" ]
 then
-  cmd="${cmd} --npm-install=${npm-install}"
+  cmd="${cmd} --npm-install=${npm_install}"
 fi
 
-if [ -n "${faucet-key}" ]
+if [ -n "${faucet_key}" ]
 then
-  cmd="${cmd} --faucet-key=${faucet-key}"
+  cmd="${cmd} --faucet-key=${faucet_key}"
 fi
 
-if [ -n "${dpns-contract-id}" ]
+if [ -n "${dpns_contract_id}" ]
 then
-  cmd="${cmd} --dpns-contract-id=${dpns-contract-id}"
+  cmd="${cmd} --dpns-contract-id=${dpns_contract_id}"
 fi
 
-if [ -n "${dpns-tld-identity-id}" ]
+if [ -n "${dpns_tld_identity_id}" ]
 then
-  cmd="${cmd} --dpns-tld-identity-id=${dpns-tld-identity-id}"
+  cmd="${cmd} --dpns-tld-identity-id=${dpns_tld_identity_id}"
 fi
 
-if [ -n "${dpns-tld-identity-private-key}" ]
+if [ -n "${dpns_tld_identity_private_key}" ]
 then
-  cmd="${cmd} --dpns-tld-identity-private-key=${dpns-tld-identity-private-key}"
+  cmd="${cmd} --dpns-tld-identity-private-key=${dpns_tld_identity_private_key}"
 fi
 
 eval $cmd
-
-
