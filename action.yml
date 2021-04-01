@@ -17,21 +17,27 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Tmp dir
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        echo "TMPDIR=${TMPDIR}" >> $GITHUB_ENV
+
     - name: Clone repository
       shell: bash
       working-directory: ${{ github.action_path }}
       run: |
-        git clone --depth 1 --branch ${{ inputs.platform-test-suite-branch }} https://github.com/dashevo/platform-test-suite.git "${TMPDIR}/platform-test-suite"
+        git clone --depth 1 --branch ${{ inputs.platform-test-suite-branch }} https://github.com/dashevo/platform-test-suite.git "${{ env.TMPDIR }}/platform-test-suite"
 
     - name: Install dependencies
       shell: bash
-      working-directory: "${TMPDIR}/platform-test-suite"
+      working-directory: "${{ env.TMPDIR }}/platform-test-suite"
       run: |
         npm ci
 
     - name: Start local network
       shell: bash
-      working-directory: "${TMPDIR}/platform-test-suite"
+      working-directory: "${{ env.TMPDIR }}/platform-test-suite"
       run: |
         source bin/test.sh 127.0.0.1:3000:3010 \
         --npm-install=${{ inputs.sdk-install }} \
