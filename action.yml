@@ -35,6 +35,12 @@ runs:
       run: |
         npm ci
 
+    - name: Env
+      shell: bash
+      working-directory: "${{ env.TMPDIR }}/platform-test-suite"
+      run: |
+        cp .env.example .env
+
     - name: Start local network
       shell: bash
       working-directory: "${{ env.TMPDIR }}/platform-test-suite"
