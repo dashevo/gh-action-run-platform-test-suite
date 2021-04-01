@@ -21,7 +21,7 @@ runs:
       shell: bash
       working-directory: ${{ github.action_path }}
       run: |
-        echo "TMPDIR=${TMPDIR}" >> $GITHUB_ENV
+        echo "TMPDIR=/tmp" >> $GITHUB_ENV
 
     - name: Clone repository
       shell: bash
