@@ -4,10 +4,11 @@ set -eax
 
 cmd_usage="Run platform-test-suite
 
-Usage: run-platform-test-suite <branch> [options]
-  <branch> branch to run
+Usage: run-platform-test-suite <seed> [options]
+  <seed> can be IP or IP:port
 
   Options:
+  --branch                    - branch to run
   --scope                     - test scope to run
   --network                   - network
   --npm-install
@@ -17,11 +18,11 @@ Usage: run-platform-test-suite <branch> [options]
   --dpns-tld-identity-private-key
 "
 
-branch="$1"
+DAPI_SEED="$1"
 
-if [ -z "$branch" ]
+if [ -z "$DAPI_SEED" ] || [[ $DAPI_SEED == -* ]]
 then
-  echo "Branch is not specified"
+  echo "Seed is not specified"
   echo ""
   echo "$cmd_usage"
   exit 1
@@ -33,6 +34,9 @@ case ${i} in
     -h|--help)
         echo "$cmd_usage"
         exit 0
+    ;;
+    --branch=*)
+    branch="${i#*=}"
     ;;
     --scope=*)
     scope="${i#*=}"
@@ -63,6 +67,11 @@ if [ -z "$TMPDIR" ]; then
   TMPDIR="/tmp"
 fi
 
+# Ensure $branch
+if [ -z "$branch" ]; then
+  branch="master"
+fi
+
 echo "Installing Platform Test Suite from branch ${branch}"
 
 git clone --depth 1 --branch $branch https://github.com/dashevo/platform-test-suite.git "$TMPDIR/platform-test-suite"
@@ -71,7 +80,7 @@ cd "$TMPDIR"/platform-test-suite
 
 npm ci
 
-cmd="/bin/bash bin/test.sh"
+cmd="/bin/bash bin/test.sh ${DAPI_SEED}"
 
 if [ -n "$scope" ]
 then

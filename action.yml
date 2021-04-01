@@ -21,7 +21,8 @@ runs:
       shell: bash
       working-directory: ${{ github.action_path }}
       run: |
-        source bin/run-platform-test-suite.sh ${{ inputs.platform-test-suite-branch }} \
+        source bin/run-platform-test-suite.sh 127.0.0.1:3000:3010 \
+        --branch=${{ inputs.platform-test-suite-branch }} \
         --scope=platform \
         --network=regtest \
         --npm-install=${{ inputs.sdk-install }} \
