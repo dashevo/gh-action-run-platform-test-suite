@@ -40,7 +40,7 @@ runs:
       working-directory: "${{ env.TMPDIR }}/platform-test-suite"
       run: |
         source bin/test.sh 127.0.0.1:3000:3010 \
-        --npm-install=${{ inputs.sdk-install }} \
+        --npm-install=github:dashevo/js-dash-sdk#${{ inputs.sdk-install }} \
         --scope=platform \
         --network=regtest \
         --faucet-key=${{ inputs.faucet-private-key }} \
