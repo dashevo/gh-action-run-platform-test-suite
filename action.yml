@@ -1,8 +1,8 @@
 name: 'Run Dash Platform Test Suite'
 description: 'Runs end-to-end and functional testing against a Dash network'
 inputs:
-  sdk-install:
-    description: SDK install
+  sdk-branch:
+    description: SDK branch to install
   faucet-private-key:
     description: Faucet private key
   dpns-contract-id:
@@ -40,7 +40,7 @@ runs:
       working-directory: "${{ env.TMPDIR }}/platform-test-suite"
       run: |
         source bin/test.sh 127.0.0.1:3000:3010 \
-        --npm-install=github:dashevo/js-dash-sdk#${{ inputs.sdk-install }} \
+        --npm-install=github:dashevo/js-dash-sdk#${{ inputs.sdk-branch }} \
         --scope=platform \
         --network=regtest \
         --faucet-key=${{ inputs.faucet-private-key }} \
