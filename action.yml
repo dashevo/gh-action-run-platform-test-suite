@@ -14,6 +14,9 @@ inputs:
   platform-test-suite-branch:
     description: Platform Test Suite version
     default: master
+  scope:
+    description: Platform Test Suite scope
+    default: platform
 runs:
   using: composite
   steps:
@@ -41,7 +44,7 @@ runs:
       run: |
         source bin/test.sh 127.0.0.1:3000:3010 \
         --npm-install=github:dashevo/js-dash-sdk#${{ inputs.sdk-branch }} \
-        --scope=platform \
+        --scope=${{ inputs.scope }} \
         --network=regtest \
         --faucet-key=${{ inputs.faucet-private-key }} \
         --dpns-contract-id=${{ inputs.dpns-contract-id }} \
