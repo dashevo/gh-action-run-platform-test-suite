@@ -16,7 +16,6 @@ inputs:
     default: master
   scope:
     description: Platform Test Suite scope
-    default: platform
 runs:
   using: composite
   steps:
