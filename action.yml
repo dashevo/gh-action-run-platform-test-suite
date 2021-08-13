@@ -11,6 +11,10 @@ inputs:
     description: DPNS top level identity ID
   dpns-top-level-identity-private-key:
     description: DPNS top level identity private key
+  feature-flags-identity-id:
+    description: Feature flags identity ID
+  feature-flags-contract-id:
+    description: Feature flags contract ID
   platform-test-suite-branch:
     description: Platform Test Suite version
     default: master
@@ -49,3 +53,5 @@ runs:
         --dpns-contract-id=${{ inputs.dpns-contract-id }} \
         --dpns-tld-identity-id=${{ inputs.dpns-top-level-identity-id }} \
         --dpns-tld-identity-private-key=${{ inputs.dpns-top-level-identity-private-key }}
+        --feature-flags-identity-id=${{ inputs.feature-flags-identity-id }}
+        --feature-flags-contract-id=${{ inputs.feature-flags-contract-id }}
