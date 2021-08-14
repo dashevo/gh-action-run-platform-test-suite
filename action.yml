@@ -52,6 +52,6 @@ runs:
         --faucet-key=${{ inputs.faucet-private-key }} \
         --dpns-contract-id=${{ inputs.dpns-contract-id }} \
         --dpns-tld-identity-id=${{ inputs.dpns-top-level-identity-id }} \
-        --dpns-tld-identity-private-key=${{ inputs.dpns-top-level-identity-private-key }}
-        --feature-flags-identity-id=${{ inputs.feature-flags-identity-id }}
+        --dpns-tld-identity-private-key=${{ inputs.dpns-top-level-identity-private-key }} \
+        --feature-flags-identity-id=${{ inputs.feature-flags-identity-id }} \
         --feature-flags-contract-id=${{ inputs.feature-flags-contract-id }}
